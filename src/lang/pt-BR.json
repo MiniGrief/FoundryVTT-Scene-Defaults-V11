@@ -1,0 +1,12 @@
+{
+    "scene-defaults": {
+        "menu": {
+            "name": "Padrões das Cenas",
+            "label": "Configure Padrões das Cenas",
+            "hint": "Configure os valores padrões usado quanda cria uma cena nova."
+        },
+        "window": {
+            "title": "Padrões da Cenas Configuração"
+        }
+    }
+}
