@@ -7,6 +7,7 @@ const currentPreset = "CurrentPreset";
 
 export class Settings {
 
+    //TODO: Remove me
     static debug() {
         console.log("Scene Defaults | All Settings");
         console.log(game.settings.get(modName, presetsData));
@@ -14,6 +15,7 @@ export class Settings {
         console.log(game.settings.get(modName, currentPreset));
     }
 
+    //TODO: Remove me
     static reset() {
         console.log("Scene Defaults | Resetting Presets");
         console.log(game.settings.set(modName, presetsData, null));
@@ -45,13 +47,12 @@ export class Settings {
         }
     }
 
-    static resetPresets() {
-        const presets = [game.settings.get(modName, foundryDefault)];
-        game.settings.set(modName, presetsData);
-    }
-
     static saveFoundryDefault(data) {
         game.settings.set(modName, foundryDefault, data);
+    }
+
+    static getFoundryDefault() {
+        return game.settings.get(modName, foundryDefault);
     }
 
     static registerSettings() {

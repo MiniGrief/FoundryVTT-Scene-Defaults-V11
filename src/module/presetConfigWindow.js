@@ -36,6 +36,38 @@ export class PresetConfigWindow extends FormApplication {
 
     activateListeners(html) {
         super.activateListeners(html);
+        html.find('button[name="reset-all"]').click(this._resetSettings.bind(this));
+    }
+
+    _resetSettings(event) {
+        event.preventDefault();
+        const form = event.target.form;
+        if(!form) {
+            return;
+        }
+        const defaultData = Settings.getFoundryDefault();
+        for(let [k, v] of Object.entries(defaultData)) {
+            const field = form[k]
+            if(field) {
+                if(field.type === "checkbox") {
+                    field.checked = v;
+                }
+                else {
+                    field.value = v;
+                }
+            }
+        }
+        //The options that default to nothing don't get reset by the above
+        //So, we'll reset them manually
+        form["img"].value = "";
+        form["journal"].value = "";
+        form["playlist"].value = "";
+        form["weather"].value = "";
+        form["navName"].value = "";
+        //Update the color pickers
+        form["backgroundColorPicker"].value = defaultData.backgroundColor;
+        form["gridColorPicker"].value = defaultData.gridColor;
+        form["darknessLabel"].value = defaultData.darkness;
     }
 
     /* -------------------------------------------- */
