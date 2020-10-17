@@ -1,8 +1,8 @@
 import { modName } from "./utils.js";
 import { PresetConfigWindow } from "./presetConfigWindow.js";
+import { FoundryDefaults } from "./foundryDefaults.js";
 
 const presetsData = "PresetsData";
-const foundryDefault = "FoundryDefault";
 const currentPreset = "CurrentPreset";
 
 export class Settings {
@@ -11,7 +11,6 @@ export class Settings {
     static debug() {
         console.log("Scene Defaults | All Settings");
         console.log(game.settings.get(modName, presetsData));
-        console.log(game.settings.get(modName, foundryDefault));
         console.log(game.settings.get(modName, currentPreset));
     }
 
@@ -28,7 +27,7 @@ export class Settings {
             return presets[index];
         }
         else {
-            return game.settings.get(modName, foundryDefault);
+            return FoundryDefaults.getDefault();
         }
     }
 
@@ -47,14 +46,6 @@ export class Settings {
         }
     }
 
-    static saveFoundryDefault(data) {
-        game.settings.set(modName, foundryDefault, data);
-    }
-
-    static getFoundryDefault() {
-        return game.settings.get(modName, foundryDefault);
-    }
-
     static registerSettings() {
         game.settings.registerMenu(modName, "Menu", {
             name: "scene-defaults.button.name",
@@ -66,11 +57,6 @@ export class Settings {
         });
         
         game.settings.register(modName, presetsData, {
-            scope: "world",
-            config: false
-        });
-
-        game.settings.register(modName, foundryDefault, {
             scope: "world",
             config: false
         });

@@ -1,5 +1,6 @@
 import { modName } from "./utils.js";
 import { Settings } from "./settings.js";
+import { FoundryDefaults } from "./foundryDefaults.js";
 
 export class PresetConfigWindow extends FormApplication {
     constructor(object, options = {}) {
@@ -31,6 +32,9 @@ export class PresetConfigWindow extends FormApplication {
     async _updateObject(entity, data) {
         console.log("Update", data);
         data.initial = null;
+        data.permission = {
+            default: data["permission.default"]
+        };
         Settings.updateCurrentPresetData(data);
     }
 
@@ -45,8 +49,12 @@ export class PresetConfigWindow extends FormApplication {
         if(!form) {
             return;
         }
-        const defaultData = Settings.getFoundryDefault();
+        const defaultData = FoundryDefaults.getDefault();
         for(let [k, v] of Object.entries(defaultData)) {
+            if(k === "permission") {
+                k = "permission.default";
+                v = v.default;
+            }
             const field = form[k]
             if(field) {
                 if(field.type === "checkbox") {
@@ -57,14 +65,7 @@ export class PresetConfigWindow extends FormApplication {
                 }
             }
         }
-        //The options that default to nothing don't get reset by the above
-        //So, we'll reset them manually
-        form["img"].value = "";
-        form["journal"].value = "";
-        form["playlist"].value = "";
-        form["weather"].value = "";
-        form["navName"].value = "";
-        //Update the color pickers
+        //Update the derived elements
         form["backgroundColorPicker"].value = defaultData.backgroundColor;
         form["gridColorPicker"].value = defaultData.gridColor;
         form["darknessLabel"].value = defaultData.darkness;
