@@ -1,11 +1,9 @@
-import { modName } from "./utils.js";
 import { Settings } from "./settings.js";
 import { FoundryDefaults } from "./foundryDefaults.js";
 
 export class PresetConfigWindow extends FormApplication {
     constructor(object, options = {}) {
         super(object, options);
-        Settings.debug();
     }
 
     static get defaultOptions() {
@@ -25,12 +23,10 @@ export class PresetConfigWindow extends FormApplication {
         data.weatherTypes = this._getWeatherTypes();
         data.playlists = this._getEntities(game.playlists);
         data.journals = this._getEntities(game.journal);
-        console.log("Get", data);
         return data;
     }
 
     async _updateObject(entity, data) {
-        console.log("Update", data);
         data.initial = null;
         data.permission = {
             default: data["permission.default"]

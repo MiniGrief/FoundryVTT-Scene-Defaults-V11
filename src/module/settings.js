@@ -6,20 +6,6 @@ const presetsData = "PresetsData";
 const currentPreset = "CurrentPreset";
 
 export class Settings {
-
-    //TODO: Remove me
-    static debug() {
-        console.log("Scene Defaults | All Settings");
-        console.log(game.settings.get(modName, presetsData));
-        console.log(game.settings.get(modName, currentPreset));
-    }
-
-    //TODO: Remove me
-    static reset() {
-        console.log("Scene Defaults | Resetting Presets");
-        console.log(game.settings.set(modName, presetsData, null));
-    }
-
     static getCurrentPresetData() {
         const presets = game.settings.get(modName, presetsData);
         const index = game.settings.get(modName, currentPreset);
@@ -42,7 +28,7 @@ export class Settings {
             game.settings.set(modName, presetsData, presets);
         }
         else {
-            console.warn("Scene Defaults | Index out of range");
+            console.error("Scene Defaults | Index out of range");
         }
     }
 
