@@ -5,7 +5,15 @@
 	"version": "1.0.0",
 	"author": "iceman76",
 	"minimumCoreVersion": "0.6.6",
-	"scripts": [
-		"scripts/test.js"
-	]
+	"esmodules": [
+		"sceneDefaults.js"
+	],
+	"languages": [
+		{
+			"lang": "en",
+			"name": "English",
+			"path": "lang/en.json"
+		}
+	],
+	"scripts": []
 }

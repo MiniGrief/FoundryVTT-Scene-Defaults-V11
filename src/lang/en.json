@@ -1,0 +1,9 @@
+{
+    "scene-defaults": {
+        "button": {
+            "name": "Button Name",
+            "label": "Button Label",
+            "hint": "Change the default values used when creating a new scene."
+        }
+    }
+}

@@ -1,0 +1,198 @@
+<form autocomplete="off">
+    <div class="form-group">
+			<label>{{localize "SCENES.SceneName"}}</label>
+        <input type="text" name="name" placeholder="Name" value="{{name}}" data-dtype="String"/>
+    </div>
+
+    <!-- <div class="form-group">
+        <label>{{localize "SCENES.JournalNotes"}}</label>
+        <select name="journal" data-dtype="String">
+            <option value=""></option>
+            {{#select journal}}
+            {{#each journals}}
+            <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+        <p class="notes">{{localize "SCENES.JournalNotesHint"}}</p>
+    </div> -->
+    <hr/>
+
+    <!-- BACKGROUND AND APPEARANCE -->
+	<h3 class="form-header"><i class="far fa-image"></i> {{localize "SCENES.Appearance"}}</h3>
+	<p class="notes">{{localize "SCENES.AppearanceHint"}}</p>
+
+    <div class="form-group">
+        <label>{{localize "SCENES.BackgroundImage"}}</label>
+        <div class="form-fields">
+            {{filePicker target="img" type="imagevideo"}}
+            <input class="image" type="text" name="img" placeholder="{{localize 'File Path'}}" value="{{img}}"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+			<label>{{localize "SCENES.Width"}} <span class="units">({{localize "SCENES.Pixels"}})</span></label>
+        <input type="text" name="width" placeholder="{{localize 'SCENES.Pixels'}}" value="{{width}}" data-dtype="Number"/>
+    </div>
+
+    <div class="form-group">
+        <label>{{localize "SCENES.Height"}} <span class="units">({{localize "SCENES.Pixels"}})</span></label>
+        <input type="text" name="height" placeholder="{{localize 'SCENES.Pixels'}}" value="{{height}}" data-dtype="Number"/>
+    </div>
+
+    <div class="form-group">
+        <label>{{localize "SCENES.BackgroundColor"}}</label>
+        <div class="form-fields">
+            <input type="text" name="backgroundColor" value="{{backgroundColor}}" data-dtype="String"/>
+            <input type="color" value="{{backgroundColor}}" data-edit="backgroundColor"/>
+        </div>
+    </div>
+    <hr>
+
+    <!-- GRID CONFIGURATION -->
+    <h3 class="form-header"><i class="fas fa-ruler"></i> {{localize "SCENES.GridConfig"}}</h3>
+    <p class="notes">{{localize "SCENES.GridConfigHint"}}</p>
+
+    <div class="form-group">
+        <label>{{localize "SCENES.GridType"}}</label>
+        <div class="form-fields">
+            <select name="gridType" data-dtype="Number">
+            {{#select gridType}}
+            {{#each gridTypes as |label t|}}
+                <option value="{{t}}">{{localize label}}</option>
+            {{/each}}
+            {{/select}}
+            </select>
+            <button type="button" class="grid-config" title="{{ localize "SCENES.GridConfigTool" }}">
+                <i class="fas fa-ruler-combined"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>{{localize "SCENES.GridSize"}} <span class="units">({{localize "SCENES.Pixels"}})</span></label>
+        <input type="text" name="grid" placeholder="{{localize 'SCENES.Pixels'}}" value="{{grid}}" data-dtype="Number"/>
+    </div>
+
+    <div class="form-group">
+        <label>{{localize "SCENES.ShiftHorz"}} <span class="units">({{localize "SCENES.Pixels"}})</span></label>
+        <input type="text" name="shiftX" placeholder="{{localize 'SCENES.Pixels'}}" value="{{shiftX}}" data-dtype="Number"/>
+    </div>
+
+    <div class="form-group">
+        <label>{{localize "SCENES.ShiftVert"}}  <span class="units">({{localize "SCENES.Pixels"}})</span></label>
+        <input type="text" name="shiftY" placeholder="{{localize 'SCENES.Pixels'}}" value="{{shiftY}}" data-dtype="Number"/>
+    </div>
+
+    <div class="form-group">
+        <label>{{localize "SCENES.GridUnits"}}</label>
+        <input type="text" name="gridUnits" placeholder="Units" value="{{gridUnits}}" data-dtype="String"/>
+    </div>
+
+    <div class="form-group">
+        <label>{{localize "SCENES.GridDist"}} <span class="units">({{localize "SCENES.Units"}})</span></label>
+        <input type="text" name="gridDistance" placeholder="Number" value="{{gridDistance}}" data-dtype="Number"/>
+    </div>
+
+    <div class="form-group">
+        <label>{{localize "SCENES.GridColor"}}</label>
+        <div class="form-fields">
+            <input type="text" name="gridColor" value="{{gridColor}}" data-dtype="String"/>
+            <input type="color" value="{{gridColor}}" data-edit="gridColor"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>{{localize "SCENES.GridOpacity"}}</label>
+        <input type="range" name="gridAlpha" value="{{gridAlpha}}" min="0" max="1" step="0.05" data-dtype="Number"/>
+    </div>
+    <hr>
+
+    <!-- CONFIGURE LIGHTING AND VISION -->
+    <h3 class="form-header"><i class="fas fa-lightbulb"></i> {{localize "SCENES.LightHeader"}}</h3>
+
+    <div class="form-group">
+        <label>{{localize "SCENES.TokenVision"}}</label>
+        <input type="checkbox" name="tokenVision" data-dtype="Boolean" {{checked tokenVision}}/>
+        <p class="notes">{{localize "SCENES.TokenVisionHint"}}</p>
+    </div>
+
+    <div class="form-group">
+        <label>{{localize "SCENES.GlobalIllum"}}</label>
+        <input type="checkbox" name="globalLight" data-dtype="Boolean" {{checked globalLight}}/>
+        <p class="notes">{{localize "SCENES.GlobalIllumHint"}}</p>
+    </div>
+
+    <div class="form-group">
+        <label>{{localize "SCENES.FogExplore"}}</label>
+        <input type="checkbox" name="fogExploration" data-dtype="Boolean" {{checked fogExploration}}/>
+        <p class="notes">{{localize "SCENES.FogExploreHint"}}</p>
+    </div>
+
+    <div class="form-group">
+        <label>{{localize "SCENES.Darkness"}}</label>
+        <div class="form-fields">
+            <input type="range" name="darkness" value="{{darkness}}" min="0" max="1" step="0.05" data-dtype="Number"/>
+            <span class="range-value">{{darkness}}</span>
+        </div>
+        <p class="notes">{{localize "SCENES.DarknessHint"}}</p>
+    </div>
+    <hr>
+
+    <!-- AMBIENCE AND ATMOSPHERE -->
+    <h3 class="form-header"><i class="fas fa-cloud-sun"></i> {{localize "SCENES.AmbienceAtmosphere"}}</h3>
+
+    <div class="form-group">
+        <label>{{localize "SCENES.AudioPlaylist"}}</label>
+        <select name="playlist" data-dtype="String">
+            <option value=""></option>
+            {{#select playlist}}
+            {{#each playlists}}
+            <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+        <p class="notes">{{localize "SCENES.AudioPlaylistHint"}}</p>
+    </div>
+
+    <div class="form-group">
+        <label>{{localize "SCENES.WeatherEffect"}}</label>
+        <select name="weather" data-dtype="String">
+            <option value=""></option>
+            {{#select weather}}
+            {{#each weatherTypes as |label t|}}
+            <option value="{{t}}">{{label}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+        <p class="notes">{{localize "SCENES.WeatherEffectHint"}}</p>
+    </div>
+    <hr>
+
+    <!-- PERMISSION AND ACCESS -->
+    <h3 class="form-header"><i class="fas fa-lock"></i> {{localize "SCENES.Access"}}</h3>
+    <p class="notes">{{localize "SCENES.AccessHint"}}</p>
+    <div class="form-group">
+        <label>{{localize "SCENES.Accessibility"}}</label>
+        <select name="permission.default" data-dtype="Number">
+        {{#select permission.default}}
+            <option value="0">{{localize "SCENES.AccessibilityGM"}}</option>
+            <option value="3">{{localize "SCENES.AccessibilityAll"}}</option>
+        {{/select}}
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>{{localize "SCENES.ShowNav"}}</label>
+        <input type="checkbox" name="navigation" value="1" data-dtype="Boolean" {{checked navigation}}/>
+    </div>
+
+    <div class="form-group">
+        <label>{{localize "SCENES.NavName"}}</label>
+        <input type="text" name="navName" value="{{navName}}" data-dtype="String"/>
+        <p class="notes">{{localize "SCENES.NavNameHint"}}</p>
+    </div>
+
+    <button type="submit" name="submit" value="1"><i class="far fa-save"></i> {{localize "Save Changes"}}</button>
+</form>
+
