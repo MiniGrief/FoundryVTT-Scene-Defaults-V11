@@ -9,7 +9,7 @@ export class PresetConfigWindow extends FormApplication {
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
             id: "scene-default-form",
-            title: "Scene Default Configuration",
+            title: game.i18n.localize("scene-defaults.window.title"),
             template: "./modules/scene-defaults/templates/presetConfigWindow.html",
             classes: ["sheet", "scene-sheet"],
             width: 720,

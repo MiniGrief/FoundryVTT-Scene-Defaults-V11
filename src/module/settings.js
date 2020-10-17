@@ -34,9 +34,9 @@ export class Settings {
 
     static registerSettings() {
         game.settings.registerMenu(modName, "Menu", {
-            name: "scene-defaults.button.name",
-            label: "scene-defaults.button.label",
-            hint: "scene-defaults.button.hint",
+            name: "scene-defaults.menu.name",
+            label: "scene-defaults.menu.label",
+            hint: "scene-defaults.menu.hint",
             icon: "fas fa-map",
             type: PresetConfigWindow,
             restricted: true

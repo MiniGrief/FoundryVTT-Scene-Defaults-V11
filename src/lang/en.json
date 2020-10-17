@@ -1,9 +1,12 @@
 {
     "scene-defaults": {
-        "button": {
-            "name": "Button Name",
-            "label": "Button Label",
+        "menu": {
+            "name": "Scene Defaults",
+            "label": "Edit Scene Defaults",
             "hint": "Change the default values used when creating a new scene."
+        },
+        "window": {
+            "title": "Scene Defaults Configuration"
         }
     }
 }
