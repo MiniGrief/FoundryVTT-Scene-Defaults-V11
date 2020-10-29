@@ -1,6 +1,5 @@
 export const defaultSceneData = {
     "0.6.6": {
-        name: "Scene",
         journal: null,
         img: null,
         width: 4000,
@@ -28,7 +27,6 @@ export const defaultSceneData = {
         navName: null
     }, 
     "0.7.5": {
-        name: "Scene",
         navigation: true,
         navName: null,
         permission: {
