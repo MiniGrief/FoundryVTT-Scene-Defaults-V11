@@ -1,19 +1,23 @@
 import { modName } from "./utils.js";
 import { PresetConfigWindow } from "./presetConfigWindow.js";
-import { FoundryDefaults } from "./foundryDefaults.js";
+import { VersionHandler } from "./versionHandler.js";
 
-const presetsData = "PresetsData";
-const currentPreset = "CurrentPreset";
+export const presetsData = "PresetsData";
+export const currentPreset = "CurrentPreset";
 
 export class Settings {
+    static wipeSettings() {
+        game.settings.set(modName, presetsData, null);
+    }
+
     static getCurrentPresetData() {
         const presets = game.settings.get(modName, presetsData);
         const index = game.settings.get(modName, currentPreset);
         if(presets?.length > index) {
-            return presets[index];
+            return presets[index].data;
         }
         else {
-            return FoundryDefaults.getDefault();
+            return VersionHandler.getFoundryDefaultScene();
         }
     }
 
@@ -24,7 +28,10 @@ export class Settings {
             presets = [{}];
         }
         if(presets.length > index) {
-            presets[index] = data;
+            presets[index] = { 
+                version: VersionHandler.effectiveVersion,
+                data
+            };
             game.settings.set(modName, presetsData, presets);
         }
         else {

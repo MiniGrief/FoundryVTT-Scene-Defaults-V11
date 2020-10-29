@@ -1,5 +1,5 @@
 import { Settings } from "./settings.js";
-import { FoundryDefaults } from "./foundryDefaults.js";
+import { VersionHandler } from "./versionHandler.js";
 
 export class PresetConfigWindow extends FormApplication {
     constructor(object, options = {}) {
@@ -10,7 +10,7 @@ export class PresetConfigWindow extends FormApplication {
         return mergeObject(super.defaultOptions, {
             id: "scene-default-form",
             title: game.i18n.localize("scene-defaults.window.title"),
-            template: "./modules/scene-defaults/templates/presetConfigWindow.html",
+            template: VersionHandler.getTemplate(),
             classes: ["sheet", "scene-sheet"],
             width: 720,
             closeOnSubmit: true
@@ -23,14 +23,25 @@ export class PresetConfigWindow extends FormApplication {
         data.weatherTypes = this._getWeatherTypes();
         data.playlists = this._getEntities(game.playlists);
         data.journals = this._getEntities(game.journal);
+
+        // Global illumination threshold
+        data.hasGlobalThreshold = data.globalLightThreshold !== null;
+        data.globalLightThreshold = data.globalLightThreshold ?? 0;
+
         return data;
     }
 
     async _updateObject(entity, data) {
+        //Initial view - not used
         data.initial = null;
+        //Handled weirdly
         data.permission = {
             default: data["permission.default"]
         };
+        //Global illumination set to null if unchecked
+        if(!data.hasGlobalThreshold) {
+            data.globalLightThreshold = null;
+        }
         Settings.updateCurrentPresetData(data);
     }
 
@@ -45,11 +56,14 @@ export class PresetConfigWindow extends FormApplication {
         if(!form) {
             return;
         }
-        const defaultData = FoundryDefaults.getDefault();
+        const defaultData = VersionHandler.getFoundryDefaultScene();
         for(let [k, v] of Object.entries(defaultData)) {
             if(k === "permission") {
                 k = "permission.default";
                 v = v.default;
+            }
+            if(k === "globalLightThreshold") {
+                v = 0;
             }
             const field = form[k]
             if(field) {
@@ -60,11 +74,15 @@ export class PresetConfigWindow extends FormApplication {
                     field.value = v;
                 }
             }
+            //Update a derived element (range label, color picker) if it exists
+            const derivedElement = k + (k.endsWith("Color") ? "Picker" : "Label");
+            if(form[derivedElement]) {
+                form[derivedElement].value = v;
+            }
         }
-        //Update the derived elements
-        form["backgroundColorPicker"].value = defaultData.backgroundColor;
-        form["gridColorPicker"].value = defaultData.gridColor;
-        form["darknessLabel"].value = defaultData.darkness;
+        if(form["hasGlobalThreshold"]) {
+            form["hasGlobalThreshold"].checked = defaultData.globalLightThreshold !== null;
+        }
     }
 
     /* -------------------------------------------- */
