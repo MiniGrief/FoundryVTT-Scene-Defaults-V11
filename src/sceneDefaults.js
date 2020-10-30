@@ -5,6 +5,9 @@ Hooks.on("init", function() {
     console.log("Scene Defaults | Initializing");
     Settings.registerSettings();
     VersionHandler.setEffectiveVersion(game.data.version);
+    if(Settings.getSavedVersion() !== VersionHandler.effectiveVersion) {
+        Settings.migrateSavedPresetsToCurrentVersion();
+    }
 });
 
 Hooks.on("preCreateScene", function(data, options) {
