@@ -1,6 +1,9 @@
 import { Settings } from "./settings.js";
 import { VersionHandler } from "./versionHandler.js";
 
+/**
+ * The window for configuring the scene presets
+ */
 export class PresetConfigWindow extends FormApplication {
     constructor(object, options = {}) {
         super(object, options);
@@ -18,7 +21,7 @@ export class PresetConfigWindow extends FormApplication {
     }
 
     getData() {
-        let data = Settings.getCurrentPresetData();
+        let data = Settings.getActivePresetData();
         data.gridTypes = this._getGridTypes();
         data.weatherTypes = this._getWeatherTypes();
         data.playlists = this._getEntities(game.playlists);
@@ -42,7 +45,7 @@ export class PresetConfigWindow extends FormApplication {
         if(!data.hasGlobalThreshold) {
             data.globalLightThreshold = null;
         }
-        Settings.updateCurrentPresetData(data);
+        Settings.updateActivePresetData(data);
     }
 
     activateListeners(html) {
@@ -50,10 +53,15 @@ export class PresetConfigWindow extends FormApplication {
         html.find('button[name="reset-all"]').click(this._resetSettings.bind(this));
     }
 
+    /**
+     * Resets the form to use Foundry's default values.
+     * @param {Object} event 
+     */
     _resetSettings(event) {
         event.preventDefault();
         const form = event.target.form;
         if(!form) {
+            console.error("Scene Defaults | Form not found");
             return;
         }
         const defaultData = VersionHandler.getFoundryDefaultScene();

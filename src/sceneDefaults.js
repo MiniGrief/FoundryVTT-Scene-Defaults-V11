@@ -13,7 +13,7 @@ Hooks.on("init", function() {
 Hooks.on("preCreateScene", function(data, options) {
     if(!options.sdUseOriginal) {
         console.log("Scene Defaults | Replacing Defaults");
-        const newData = Settings.getCurrentPresetData();
+        const newData = Settings.getActivePresetData();
         mergeObject(data, newData, true, true, true);
     }
 });

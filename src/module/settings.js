@@ -3,43 +3,64 @@ import { PresetConfigWindow } from "./presetConfigWindow.js";
 import { VersionHandler } from "./versionHandler.js";
 
 export const presetsData = "PresetsData";
-export const currentPreset = "CurrentPreset";
 export const savedVersion = "Version";
 
+/**
+ * A class to handle interacting with Foundry's settings.
+ * Mostly used to save and load presets.
+ */
 export class Settings {
+    /**
+     * Sets all settings to null.
+     * Please don't call this outside of testing.
+     * Please.
+     */
     static wipeSettings() {
         console.warn("Scene Defaults | Wiping all presets");
         game.settings.set(modName, presetsData, null);
+        game.settings.set(modName, savedVersion, null);
     }
 
-    static getCurrentPresetData() {
+    /**
+     * @returns {Object} The data for the active preset, or the default data if there is none
+     */
+    static getActivePresetData() {
         const presets = game.settings.get(modName, presetsData);
-        const index = game.settings.get(modName, currentPreset);
-        if(presets?.length > index) {
-            return presets[index].data;
+        if(presets?.length > 0) {
+            return presets[0].data;
         }
         else {
             return VersionHandler.getFoundryDefaultScene();
         }
     }
 
-    static updateCurrentPresetData(data) {
+    /**
+     * Updates the active preset with the user-defined settings
+     * @param {Object} data The new settings for the preset
+     */
+    static updateActivePresetData(data) {
+        console.log("Scene Defaults | Saving Preset settings");
         let presets = game.settings.get(modName, presetsData);
-        const index = game.settings.get(modName, currentPreset);
-        if(!(presets?.length > 0)) {
-            presets = [{}];
-        }
-        if(presets.length > index) {
-            presets[index] = {
+        if(!presets?.length) {
+            console.warn("Scene Defaults | Presets were not loaded before being updated");
+            presets = [{
                 data
-            };
-            game.settings.set(modName, presetsData, presets);
+            }];
         }
         else {
-            console.error("Scene Defaults | Index out of range");
+            presets[0] = {
+                data
+            };
         }
+        game.settings.set(modName, presetsData, presets);
     }
 
+    /**
+     * Update the user's saved presets, bringing them up to the newest version
+     * Any values in the new version that weren't in the old version are added,
+     *  using Foundry's default values.
+     * Existing values are kept as the user had saved them.
+     */
     static migrateSavedPresetsToCurrentVersion() {
         if(!VersionHandler.effectiveVersion) {
             console.error("Scene Defaults | Version was not set before trying to migrate presets.");
@@ -65,6 +86,9 @@ export class Settings {
         game.settings.set(modName, savedVersion, VersionHandler.effectiveVersion);
     }
 
+    /**
+     * @returns {string} The Foundry version that the existing presets used.
+     */
     static getSavedVersion() {
         return game.settings.get(modName, savedVersion);
     }
@@ -82,12 +106,6 @@ export class Settings {
         game.settings.register(modName, presetsData, {
             scope: "world",
             config: false
-        });
-
-        game.settings.register(modName, currentPreset, {
-            scope: "world",
-            config: false,
-            default: 0
         });
 
         game.settings.register(modName, savedVersion, {

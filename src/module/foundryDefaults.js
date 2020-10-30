@@ -1,3 +1,4 @@
+//A map of the default scene settings for each supported Foundry version
 export const defaultSceneData = {
     "0.6.6": {
         journal: null,

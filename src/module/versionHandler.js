@@ -1,9 +1,19 @@
 import { defaultSceneData } from "./foundryDefaults.js";
 
+/**
+ * A class to help manage support for different versions of Foundry.
+ */
 export class VersionHandler {
+    // The Foundry versions that have been implemented
     static implementedFoundryVersions = ["0.6.6", "0.7.5"];
+    // The version we are treating Foundry as
     static effectiveVersion;
 
+    /**
+     * Sets the "effectiveVersion" parameter to the newest
+     *  supported Foundry version that is not newer than it.
+     * @param {string} foundryVersion The current true version of Foundry
+     */
     static setEffectiveVersion(foundryVersion) {
         if(VersionHandler.effectiveVersion) {
             console.warn("Scene Defaults | Version is being set multiple times");
@@ -12,6 +22,11 @@ export class VersionHandler {
         VersionHandler.effectiveVersion = this.findClosestImplementedVersion(foundryVersion);
     }
 
+    /**
+     * Essentially "floors" the current Foundry version to an implemented version
+     * @param {string} foundryVersion The current true version of Foundry
+     * @returns {string} The closest implemented version
+     */
     static findClosestImplementedVersion(foundryVersion) {
         for(let i = VersionHandler.implementedFoundryVersions.length - 1; i >= 0; i--) {
             const version = VersionHandler.implementedFoundryVersions[i];
@@ -22,6 +37,9 @@ export class VersionHandler {
         console.error("Scene Defaults | Foundry Version is unsupported.");
     }
 
+    /**
+     * @returns {Object} The default data Foundry uses to create scenes for the current effective version of Foundry
+     */
     static getFoundryDefaultScene() {
         if(!VersionHandler.effectiveVersion) {
             console.error("Scene Defaults | Version was not set before getting Foundry defaults");
@@ -29,6 +47,9 @@ export class VersionHandler {
         return defaultSceneData[VersionHandler.effectiveVersion];
     }
 
+    /**
+     * @returns {string} the path to the template used to configure scene defaults for the current effective version of Foundry
+     */
     static getTemplate() {
         if(!VersionHandler.effectiveVersion) {
             console.error("Scene Defaults | Version was not set before getting template");
@@ -40,6 +61,15 @@ export class VersionHandler {
         return templates[VersionHandler.effectiveVersion];
     }
 
+    /**
+     * Migrates a scene's data to the given Foundry version,
+     *  adding any missing settings by using Foundry's default settings.
+     * No data is (read: should be) overwritten.
+     * The updated data is returned, rather than updated in place.
+     * @param {Object} data Data from an existing preset.
+     * @param {string} targetVersion The version to which to update the data
+     * @returns {Object} The migrated data
+     */
     static migrateSceneData(data, targetVersion) {
         targetVersion = this.findClosestImplementedVersion(targetVersion);
         let targetDefaultData = defaultSceneData[targetVersion];
