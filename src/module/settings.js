@@ -72,7 +72,7 @@ export class Settings {
             console.log("Scene Defaults | Migrating saved presets to version " + VersionHandler.effectiveVersion);
             for(let i = 0; i < presets.length; i++) {
                 const preset = presets[i];
-                preset.data = VersionHandler.migrateSceneData(preset.data, VersionHandler.effectiveVersion);
+                preset.data = VersionHandler.migrateSceneData(preset.data);
             }
         }
         else {

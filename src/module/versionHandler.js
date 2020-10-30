@@ -44,7 +44,11 @@ export class VersionHandler {
         if(!VersionHandler.effectiveVersion) {
             console.error("Scene Defaults | Version was not set before getting Foundry defaults");
         }
-        return defaultSceneData[VersionHandler.effectiveVersion];
+        const sceneData = defaultSceneData[VersionHandler.effectiveVersion];
+        //Default grid units/distance are set by the system
+        sceneData.gridDistance = game.data.system.data.gridDistance ?? 5;
+        sceneData.gridUnits = game.data.system.data.gridUnits ?? "ft";
+        return sceneData;
     }
 
     /**
@@ -62,19 +66,17 @@ export class VersionHandler {
     }
 
     /**
-     * Migrates a scene's data to the given Foundry version,
+     * Migrates a scene's data to the current effective Foundry version,
      *  adding any missing settings by using Foundry's default settings.
      * No data is (read: should be) overwritten.
      * The updated data is returned, rather than updated in place.
      * @param {Object} data Data from an existing preset.
-     * @param {string} targetVersion The version to which to update the data
      * @returns {Object} The migrated data
      */
-    static migrateSceneData(data, targetVersion) {
-        targetVersion = this.findClosestImplementedVersion(targetVersion);
-        let targetDefaultData = defaultSceneData[targetVersion];
+    static migrateSceneData(data) {
+        const targetDefaultData = VersionHandler.getFoundryDefaultScene();
         if(!data) {
-            console.warn("Scene Defaults | Trying to migrate null data. Returning default data")
+            console.warn("Scene Defaults | Trying to migrate null data. Using default data instead")
             return targetDefaultData;
         }
         // Add all keys needed for the target version, but don't overwrite existing data
