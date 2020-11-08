@@ -1,8 +1,8 @@
 # Scene Defaults
-A module that allows you to change the default settings when creating new scenes.
+A module that allows you to change the default settings when creating new scenes. For instance, you can have new scenes created with a grid size of 50 instead of 100 or with Global Illumination turned on, without having to change it each time.
 
 # Usage
-Simply open up the window under "Module Settings", edit the settings to your heart's content, and save it. Any scenes you create will start out with those settings.
+Simply click on "Edit Scene Defaults" under "Module Settings", edit the settings to your heart's content, and save it. Any scenes you create will start out with those settings.
 
 # Compatibility
 * **Foundry Version**: Scene Defaults is compatible with Foundry VTT 0.6.6 through 0.7.5, and is safe to use with newer versions as well. (The window for editing scene defaults might get funky, though.)
