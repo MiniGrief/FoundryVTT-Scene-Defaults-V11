@@ -1,11 +1,11 @@
 {
 	"name": "scene-defaults",
 	"title": "Scene Defaults",
-	"description": "Lets players change the default settings when creating a new scene.",
-	"version": "1.0.0",
+	"description": "Lets gamemasters change the default settings that are used when creating a new scene.",
+	"version": "1.0.1",
 	"author": "iceman76",
 	"minimumCoreVersion": "0.6.6",
-	"compatibleCoreVersion": "0.7.5",
+	"compatibleCoreVersion": "0.7.6",
 	"esmodules": [
 		"sceneDefaults.js"
 	],
