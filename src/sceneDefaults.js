@@ -1,5 +1,6 @@
 import { Settings } from "./module/settings.js";
 import { VersionHandler } from "./module/versionHandler.js";
+import { isCopy } from "./module/utils.js";
 
 Hooks.on("init", function() {
     console.log("Scene Defaults | Initializing");
@@ -11,7 +12,7 @@ Hooks.on("init", function() {
 });
 
 Hooks.on("preCreateScene", function(data, options) {
-    if(!options.sdUseOriginal) {
+    if(!options.sdUseOriginal && !isCopy(data)) {
         console.log("Scene Defaults | Replacing Defaults");
         const newData = Settings.getActivePresetData();
         mergeObject(data, newData, true, true, true);

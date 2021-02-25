@@ -3,3 +3,7 @@
  * Importance of this comment: 0
  */
 export const modName = "scene-defaults"
+
+export function isCopy(data) {
+    return !!data._id;
+}
