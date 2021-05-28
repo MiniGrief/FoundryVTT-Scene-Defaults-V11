@@ -11,7 +11,6 @@ export const defaultSceneData = {
         shiftX: 0,
         shiftY: 0,
         gridColor: "#000000",
-        gridColor: "#000000",
         gridAlpha: 0.2,
         tokenVision: true,
         globalLight: false,
@@ -50,5 +49,33 @@ export const defaultSceneData = {
         journal: null,
         playlist: null,
         weather: null
+    }, 
+    "0.8.5": {
+        backgroundColor: "#999999",
+        darkness: 0,
+        fogExploration: true,
+        foreground: null,
+        globalLight: false,
+        globalLightThreshold: null,
+        grid: 100,
+        gridAlpha: 0.2,
+        gridColor: "#000000",
+        gridType: 1,
+        height: 3000,
+        img: null,
+        journal: null,
+        navName: null,
+        navigation: true,
+        padding: 0.25,
+        permission: {
+            default: 0
+        },
+        playlist: null,
+        playlistSound: null,
+        shiftX: 0,
+        shiftY: 0,
+        tokenVision: true,
+        weather: null,
+        width: 4000
     }
 }

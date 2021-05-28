@@ -5,7 +5,7 @@ A module that allows you to change the default settings when creating new scenes
 Simply click on "Edit Scene Defaults" under "Module Settings", edit the settings to your heart's content, and save it. Any scenes you create will start out with those settings.
 
 # Compatibility
-* **Foundry Version**: Scene Defaults is compatible with Foundry VTT 0.6.6 through 0.7.9, and is safe to use with newer versions as well. (The window for editing scene defaults might get funky, though.)
+* **Foundry Version**: Scene Defaults is compatible with Foundry VTT 0.6.6 through 0.8.6, and is safe to use with newer versions as well. (The window for editing scene defaults might get funky, though.)
 * **Systems**: Scene Defaults should be compatible with all systems, but won't let you edit scene settings that they might add.
 * **Modules**: Scene Defaults shouldn't cause issues with other modules add to scene settings, but won't enable you to change default options for them.
 

@@ -24,8 +24,20 @@ export class PresetConfigWindow extends FormApplication {
         let data = Settings.getActivePresetData();
         data.gridTypes = this._getGridTypes();
         data.weatherTypes = this._getWeatherTypes();
-        data.playlists = this._getEntities(game.playlists);
-        data.journals = this._getEntities(game.journal);
+        // Getting entities was deprecated in 0.8.0,
+        // replaced by getting documents
+        if(isNewerVersion("0.8.0", game.data.version)) {
+            // Old
+            data.playlists = this._getEntities(game.playlists);
+            data.journals = this._getEntities(game.journal);
+        }
+        else {
+            // New
+            data.playlists = this._getDocuments(game.playlists);
+            const playlist = game.playlists.get(data.playlist);
+            data.sounds = this._getDocuments(playlist?.data.sounds ?? []);
+            data.journals = this._getDocuments(game.journal);
+        }
 
         // Global illumination threshold
         data.hasGlobalThreshold = data.globalLightThreshold !== null;
@@ -51,6 +63,7 @@ export class PresetConfigWindow extends FormApplication {
     activateListeners(html) {
         super.activateListeners(html);
         html.find('button[name="reset-all"]').click(this._resetSettings.bind(this));
+        html.find("select[name='playlist']").change(this._onChangePlaylist.bind(this));
     }
 
     /**
@@ -93,7 +106,22 @@ export class PresetConfigWindow extends FormApplication {
         }
     }
 
-    /* -------------------------------------------- */
+    /**
+     * Handle updating the select menu of PlaylistSound options when the Playlist is changed
+     * @param {Event} event   The initiating select change event
+     * @private
+     */
+    _onChangePlaylist(event) {
+      event.preventDefault();
+      const playlist = game.playlists.get(event.target.value);
+      const sounds = this._getDocuments(playlist?.sounds || []);
+      const options = ['<option value=""></option>'].concat(sounds.map(s => {
+        return `<option value="${s.id}">${s.name}</option>`;
+      }));
+      const select = this.form.querySelector(`select[name="playlistSound"]`);
+      select.innerHTML = options.join("");
+    }
+
     /**
      * Get an enumeration of the available grid types which can be applied to this Scene
      * @return {Object}
@@ -114,7 +142,6 @@ export class PresetConfigWindow extends FormApplication {
       }, {});
     }
   
-    /* -------------------------------------------- */
     /**
      * Get the available weather effect types which can be applied to this Scene
      * @return {Object}
@@ -128,7 +155,6 @@ export class PresetConfigWindow extends FormApplication {
       return types;
     }
   
-    /* -------------------------------------------- */
     /**
      * Get the alphabetized entities which can be chosen as a configuration for the scene
      * @param {EntityCollection} collection
@@ -141,5 +167,19 @@ export class PresetConfigWindow extends FormApplication {
       });
       entities.sort((a, b) => a.name.localeCompare(b.name));
       return entities;
+    }
+  
+    /**
+     * Get the alphabetized Documents which can be chosen as a configuration for the Scene
+     * @param {WorldCollection} collection
+     * @return {object[]}
+     * @private
+     */
+    _getDocuments(collection) {
+        const documents = collection.map(doc => {
+          return {id: doc.id, name: doc.name};
+        });
+        documents.sort((a, b) => a.name.localeCompare(b.name));
+        return documents;
     }
 }

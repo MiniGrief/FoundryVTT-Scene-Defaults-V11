@@ -5,7 +5,7 @@ import { defaultSceneData } from "./foundryDefaults.js";
  */
 export class VersionHandler {
     // The Foundry versions that have been implemented
-    static implementedFoundryVersions = ["0.6.6", "0.7.5"];
+    static implementedFoundryVersions = ["0.6.6", "0.7.5", "0.8.5"];
     // The version we are treating Foundry as
     static effectiveVersion;
 
@@ -60,7 +60,8 @@ export class VersionHandler {
         }
         const templates = {
             "0.6.6": "./modules/scene-defaults/templates/defaultSceneConfigs/defaultSceneConfig-0-6-6.html",
-            "0.7.5": "./modules/scene-defaults/templates/defaultSceneConfigs/defaultSceneConfig-0-7-5.html"
+            "0.7.5": "./modules/scene-defaults/templates/defaultSceneConfigs/defaultSceneConfig-0-7-5.html",
+            "0.8.5": "./modules/scene-defaults/templates/defaultSceneConfigs/defaultSceneConfig-0-8-6.html"
         }
         return templates[VersionHandler.effectiveVersion];
     }
