@@ -1,3 +1,7 @@
+# 1.0.4
+
+* Add support for 0.8.x
+
 # 1.0.3
 
 * Don't override settings when importing compendium scenes.
