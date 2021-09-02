@@ -1,0 +1,12 @@
+{
+    "scene-defaults": {
+        "menu": {
+            "name": "Domyślne Sceny",
+            "label": "Edytuj Domyślne Sceny",
+            "hint": "Zmień wartości domyślne wykorzystywane w momencie tworzenia nowej sceny."
+        },
+        "window": {
+            "title": "Konfiguracja Domyślnych Scen"
+        }
+    }
+}
