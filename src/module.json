@@ -5,8 +5,8 @@
     "version": "1.0.5",
     "author": "iceman76",
     "compatibility": {
-		"minimum": "6",
-		"verified": "8"
+		"minimum": "11",
+		"verified": "11.306"
 	  },
     "esmodules": [
         "sceneDefaults.js"
