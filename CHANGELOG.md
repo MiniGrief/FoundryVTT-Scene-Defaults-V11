@@ -1,3 +1,8 @@
+# 1.0.5
+
+* Add support for 11.x
+* Remove support for previous versions (0.8.x and previous are extremely outdated and anyone using them should heavily consider updating)
+
 # 1.0.4
 
 * Add support for 0.8.x
