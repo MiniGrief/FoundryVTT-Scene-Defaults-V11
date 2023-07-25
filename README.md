@@ -1,5 +1,5 @@
 # Scene Defaults
-![Foundry Core Compatible Version]([https://img.shields.io/badge/dynamic/json.svg?url=https%3A%2F%2Fraw.githubusercontent.com%2FBradfordC%2FFoundryVTT-Scene-Defaults%2Fmaster%2Fsrc%2Fmodule.json&label=Foundry%20Version&query=$.compatibleCoreVersion&colorB=orange](https://img.shields.io/badge/Foundry_Version-11.306-orange))
+![Foundry Core Compatible Version](https://img.shields.io/badge/Foundry_Version-11.306-orange)
 
 A module that allows you to change the default settings when creating new scenes. For instance, you can have new scenes created with a grid size of 50 instead of 100 or with Global Illumination turned on, without having to change it each time.
 
