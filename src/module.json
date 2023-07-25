@@ -1,37 +1,39 @@
 {
-	"name": "scene-defaults",
-	"title": "Scene Defaults",
-	"description": "Lets gamemasters change the default settings that are used when creating a new scene.",
-	"version": "1.0.4",
-	"author": "iceman76",
-	"minimumCoreVersion": "0.6.6",
-	"compatibleCoreVersion": "0.8.5",
-	"esmodules": [
-		"sceneDefaults.js"
-	],
-	"languages": [
-		{
-			"lang": "en",
-			"name": "English",
-			"path": "lang/en.json"
-		},
-		{
-			"lang": "pt-BR",
-			"name": "Português (Brasil)",
-			"path": "lang/pt-BR.json"
-		},
+    "name": "scene-defaults",
+    "title": "Scene Defaults",
+    "description": "Lets gamemasters change the default settings that are used when creating a new scene.",
+    "version": "1.0.5",
+    "author": "iceman76",
+    "compatibility": {
+		"minimum": "6",
+		"verified": "8"
+	  },
+    "esmodules": [
+        "sceneDefaults.js"
+    ],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        },
+        {
+            "lang": "pt-BR",
+            "name": "Português (Brasil)",
+            "path": "lang/pt-BR.json"
+        },
 		{
 			"lang": "pl",
 			"name": "Polski",
 			"path": "lang/pl.json"
 		}
-	],
-	"allowBugReporter": true,
-	"url": "https://github.com/BradfordC/FoundryVTT-Scene-Defaults",
-	"manifest": "https://github.com/BradfordC/FoundryVTT-Scene-Defaults/releases/latest/download/module.json",
-	"download": "https://github.com/BradfordC/FoundryVTT-Scene-Defaults/releases/latest/download/module.zip",
-	"license": "https://github.com/BradfordC/FoundryVTT-Scene-Defaults/blob/master/LICENSE",
-	"readme": "https://github.com/BradfordC/FoundryVTT-Scene-Defaults/blob/master/README.md",
-	"bugs": "https://github.com/BradfordC/FoundryVTT-Scene-Defaults/issues",
-	"changelog": "https://github.com/BradfordC/FoundryVTT-Scene-Defaults/blob/master/CHANGELOG.md"
+    ],
+    "allowBugReporter": true,
+    "url": "https://github.com/MiniGrief/FoundryVTT-Scene-Defaults-V11",
+    "manifest": "https://github.com/MiniGrief/FoundryVTT-Scene-Defaults-V11/releases/latest/download/module.json",
+    "download": "https://github.com/MiniGrief/FoundryVTT-Scene-Defaults-V11/releases/download/latest/module.zip",
+    "license": "https://github.com/MiniGrief/FoundryVTT-Scene-Defaults-V11/blob/master/LICENSE",
+    "readme": "https://github.com/MiniGrief/FoundryVTT-Scene-Defaults-V11/blob/master/README.md",
+    "bugs": "https://github.com/MiniGrief/FoundryVTT-Scene-Defaults-V11/issues",
+    "changelog": "https://github.com/MiniGrief/FoundryVTT-Scene-Defaults-V11/blob/master/CHANGELOG.md"
 }
