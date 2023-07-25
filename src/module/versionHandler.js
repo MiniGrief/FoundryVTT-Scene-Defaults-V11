@@ -46,8 +46,8 @@ export class VersionHandler {
         }
         const sceneData = defaultSceneData[VersionHandler.effectiveVersion];
         //Default grid units/distance are set by the system
-        sceneData.gridDistance = game.data.system.data.gridDistance ?? 5;
-        sceneData.gridUnits = game.data.system.data.gridUnits ?? "ft";
+        sceneData.gridDistance = game.data.system.gridDistance ?? 5;
+        sceneData.gridUnits = game.data.system.gridUnits ?? "ft";
         return sceneData;
     }
 
