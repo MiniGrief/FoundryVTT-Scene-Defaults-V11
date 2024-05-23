@@ -2,11 +2,11 @@
     "name": "scene-defaults",
     "title": "Scene Defaults",
     "description": "Lets gamemasters change the default settings that are used when creating a new scene.",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "author": "iceman76",
     "compatibility": {
 		"minimum": "11",
-		"verified": "11.306"
+		"verified": "12.324"
 	  },
     "esmodules": [
         "sceneDefaults.js"
