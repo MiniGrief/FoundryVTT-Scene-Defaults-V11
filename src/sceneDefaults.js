@@ -17,7 +17,7 @@ Hooks.on("ready", function() {
 Hooks.on("preCreateScene", function(scene, data, options) {
 	console.log("Scene Defaults | Replacing Defaults");
 	const preset = Settings.getActivePresetData();
-	const newData = mergeObject(data, preset, {
+	const newData = foundry.utils.mergeObject(data, preset, {
 		insertKeys: true,
 		insertValues: true,
 		overwrite: true,
